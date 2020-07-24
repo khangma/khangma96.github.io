@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>A Pelican Blog</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="A Pelican Blog Atom Feed" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">A Pelican Blog</a></h1>
+                <nav><ul>
+                    <li><a href="/category/misc.html">misc</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="/my-first-project.html">My First Project</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2020-07-23T12:43:00+00:00">
+                Published: Thu 23 July 2020
+        </abbr>
+
+<p>In <a href="/category/misc.html">misc</a>.</p>
+
+</footer><!-- /.post-info --><h1>Austin Ma, ID 1386739</h1>
+<h2>221 Data Science and Scientific Computing using Julia</h2>
+<h1>Final Exam</h1>
+<h2>Question 1</h2>
+<p>Define a function <code>insert_block</code> to insert a block of values in a matrix,</p>
+<div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">fill</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+<span class="n">insert_block</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+
+<p>so that the above code would yield:</p>
+<p><code>9×9 Array{Int64,2}:
+ 0  0  0  0  0  0  0  0  0
+ 0  0  0  0  0  0  0  0  0
+ 0  0  0  0  2  2  2  0  0
+ 0  0  0  0  2  2  2  0  0
+ 0  0  0  0  2  2  2  0  0
+ 0  0  0  0  0  0  0  0  0
+ 0  0  0  0  0  0  0  0  0
+ 0  0  0  0  0  0  0  0  0
+ 0  0  0  0  0  0  0  0  0</code></p>
+<div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">fill</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+
+<span class="c"># there is no mention of the size of the block so I assumed it to be size of 3x3</span>
+<span class="k">function</span> <span class="n">insert_block</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+    <span class="n">sizeA</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="kp">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">sizeA</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="kp">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">sizeA</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="k">if</span> <span class="p">((</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">row</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">row</span> <span class="o">+</span> <span class="mi">2</span><span class="p">))</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">sizeA</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="c"># if it is specified number and smaller than num + 2 for 3 entries</span>
+                <span class="k">if</span> <span class="p">((</span><span class="n">j</span> <span class="o">&gt;=</span> <span class="n">col</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">j</span> <span class="o">&lt;=</span> <span class="n">col</span> <span class="o">+</span> <span class="mi">2</span><span class="p">))</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">j</span> <span class="o">&lt;=</span> <span class="n">sizeA</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+                    <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+                <span class="k">end</span> <span class="c"># j conditional</span>
+            <span class="k">end</span> <span class="c">#i conditional</span>
+        <span class="k">end</span> <span class="c"># inner for loop</span>
+    <span class="k">end</span> <span class="c"># outer for loop</span>
+<span class="k">end</span> <span class="c"># function</span>
+
+<span class="n">insert_block</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">A</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="err">9×9 Array{Int64,2}:</span>
+<span class="err"> 0  0  0  0  0  0  0  0  0</span>
+<span class="err"> 0  0  0  1  1  1  0  0  0</span>
+<span class="err"> 0  0  0  1  1  1  0  0  0</span>
+<span class="err"> 0  0  0  1  1  1  0  0  0</span>
+<span class="err"> 0  0  0  0  0  0  0  0  0</span>
+<span class="err"> 0  0  0  0  0  0  0  0  0</span>
+<span class="err"> 0  0  0  0  0  0  0  0  0</span>
+<span class="err"> 0  0  0  0  0  0  0  0  0</span>
+<span class="err"> 0  0  0  0  0  0  0  0  0</span>
+</pre></div>
+
+
+<h2>Question 2</h2>
+<h3>Create a Caesar ciphers</h3>
+<p>A caesar cipher is an encryption scheme that shifts all letters in the alphabet by some specified offset to other letters in the alphabet.</p>
+<p>For example, a shift of 1 would turn the letter "A" into the letter "B" and the letter "M" to the letter "N".</p>
+<h3>Goal</h3>
+<p>We want to add a method to the <code>+</code> operator such that we can add together a string and an integer shift to encrypt a message. For example,</p>
+<div class="highlight"><pre><span></span><span class="mi">4</span> <span class="o">+</span> <span class="s">&quot;hello&quot;</span> <span class="o">==</span> <span class="s">&quot;lipps&quot;</span>
+</pre></div>
+
+
+<h3>Test it out</h3>
+<p>Once you think you have it working, try to decrypt the following string by adding a shift of -7.</p>
+<div class="highlight"><pre><span></span><span class="s">&quot;Kv&#39;uv{&#39;tlkksl&#39;pu&#39;{ol&#39;hmmhpyz&#39;vm&#39;kyhnvuz&#39;mvy&#39;</span><span class="se">\u80</span><span class="s">v|&#39;hyl&#39;jy|ujo</span><span class="se">\u80</span><span class="s">&#39;huk&#39;{hz{l&#39;nvvk&#39;~p{o&#39;rl{jo|w5&quot;</span>
+</pre></div>
+
+
+<h2>Below is the step by step guide to solve the Caesar ciphers problem</h2>
+<h3>Step 1</h3>
+<p>First, we want a way to convert between characters and integers. Actually, under the hood, all of our characters are being represented as numbers via their <em>ASCII representation</em>.</p>
+<p>You can start to get a feel for how this works by running the following lines of code.</p>
+<div class="highlight"><pre><span></span><span class="n">convert</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="sc">&#39;a&#39;</span><span class="p">)</span>
+<span class="n">convert</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="sc">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">convert</span><span class="p">(</span><span class="kt">Char</span><span class="p">,</span> <span class="mi">97</span><span class="p">)</span>
+<span class="n">convert</span><span class="p">(</span><span class="kt">Char</span><span class="p">,</span> <span class="mi">98</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">convert</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="sc">&#39;a&#39;</span><span class="p">)</span>
+<span class="n">convert</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="sc">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">convert</span><span class="p">(</span><span class="kt">Char</span><span class="p">,</span> <span class="mi">97</span><span class="p">)</span>
+<span class="n">convert</span><span class="p">(</span><span class="kt">Char</span><span class="p">,</span> <span class="mi">98</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="err">&#39;b&#39;: ASCII/Unicode U+0062 (category Ll: Letter, lowercase)</span>
+</pre></div>
+
+
+<p>What happens when you try to add an integer to a character? (Note that the difference between <code>Char</code>s and <code>String</code>s is important here!)</p>
+<div class="highlight"><pre><span></span><span class="sc">&#39;a&#39;</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="err">&#39;b&#39;: ASCII/Unicode U+0062 (category Ll: Letter, lowercase)</span>
+</pre></div>
+
+
+<p>When we treat a string elementwise, what is the type of (<code>typeof</code>) each element?</p>
+<div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="sc">&#39;a&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="err">Char</span>
+</pre></div>
+
+
+<h3>Step 2</h3>
+<p>Try to write a function called <code>caesar(shift, stringin)</code> that encodes its input string, <code>stringin</code>, by shifting all letters in the alphabet by <code>shift</code>.</p>
+<p>One way to do this is to use the <code>map</code> or <code>broadcast</code> function!</p>
+<div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">caesar</span><span class="p">(</span><span class="n">shift</span><span class="p">,</span> <span class="n">stringin</span><span class="p">)</span>
+    <span class="c">#splitting string into array of char</span>
+    <span class="n">input</span> <span class="o">=</span> <span class="n">collect</span><span class="p">(</span><span class="n">stringin</span><span class="p">)</span>
+    <span class="c">#mapping shift to every char</span>
+    <span class="n">input</span> <span class="o">=</span> <span class="n">map</span><span class="p">(</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">shift</span><span class="p">,</span> <span class="n">input</span><span class="p">)</span>
+    <span class="c">#regrouping array of char back to string</span>
+    <span class="n">join</span><span class="p">(</span><span class="n">input</span><span class="p">)</span>
+<span class="k">end</span> <span class="c"># function</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="err">caesar (generic function with 1 method)</span>
+</pre></div>
+
+
+<p>If you think you have this working, try out</p>
+<div class="highlight"><pre><span></span><span class="n">caesar</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="s">&quot;lipps&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">caesar</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="s">&quot;lipps&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="err">&quot;hello&quot;</span>
+</pre></div>
+
+
+<h3>Step 3</h3>
+<p>We want to extend the <code>+</code> operator to include a way to apply this cipher.</p>
+<p>The <code>+</code> operator lives in a place called "Base". Everything that lives in Base is accessible to us as users by default, but we need a special incantation to modify the things that live in Base. If we want to modify <code>+</code>, our incantation is</p>
+<div class="highlight"><pre><span></span><span class="k">import</span> <span class="n">Base</span><span class="o">:</span> <span class="o">+</span>
+</pre></div>
+
+
+<p>To perform string addition, write a method for <code>+</code> like this</p>
+<p>+(x::String, y::String) = string(x, y)</p>
+<div class="highlight"><pre><span></span><span class="k">import</span> <span class="n">Base</span><span class="o">:</span> <span class="o">+</span>
+<span class="o">+</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="n">String</span><span class="p">,</span> <span class="n">y</span><span class="o">::</span><span class="n">String</span><span class="p">)</span> <span class="o">=</span> <span class="n">string</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="s">&quot;hello&quot;</span> <span class="o">+</span> <span class="s">&quot;there&quot;</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="err">&quot;hellothere&quot;</span>
+</pre></div>
+
+
+<p>And now that you've extended <code>+</code> once, let's add another method for <code>+</code> that calls the <code>caesar</code> function we've written.</p>
+<div class="highlight"><pre><span></span><span class="k">import</span> <span class="n">Base</span><span class="o">:</span> <span class="o">+</span>
+<span class="o">+</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="n">String</span><span class="p">,</span> <span class="n">y</span><span class="o">::</span><span class="kt">Int</span><span class="p">)</span> <span class="o">=</span> <span class="n">caesar</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="s">&quot;Hello&quot;</span> <span class="o">+</span> <span class="mi">2</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="err">&quot;Jgnnq&quot;</span>
+</pre></div>
+
+
+<p>Test your final answer.</p>
+<div class="highlight"><pre><span></span><span class="s">&quot;lipps&quot;</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="err">&quot;hello&quot;</span>
+</pre></div>
+
+
+<h2>Question 3</h2>
+<p>Download the <code>test.csv</code> file from moddle. This data has passenger details of train travellers. Read the data and tidy it (handle the missing values). Calculate the average age for Male passengers and Female passengers.</p>
+<div class="highlight"><pre><span></span><span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;CSV&quot;</span><span class="p">)</span> <span class="c"># for CSV.read()</span>
+<span class="k">using</span> <span class="n">CSV</span>
+<span class="k">using</span> <span class="n">Pkg</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;DataFrames&quot;</span><span class="p">)</span>
+<span class="k">using</span> <span class="n">DataFrames</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;Statistics&quot;</span><span class="p">)</span>
+<span class="k">using</span> <span class="n">Statistics</span>  <span class="c"># julia&#39;s standard library for stats</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="err"></span><span class="p">[</span><span class="mi">32</span><span class="n">m</span><span class="err"></span><span class="p">[</span><span class="mi">1</span><span class="n">m</span>   <span class="n">Updating</span><span class="err"></span><span class="p">[</span><span class="mi">22</span><span class="n">m</span><span class="err"></span><span class="p">[</span><span class="mi">39</span><span class="n">m</span> <span class="n">registry</span> <span class="n">at</span> <span class="err">`</span><span class="o">~/</span><span class="p">.</span><span class="n">juliapro</span><span class="o">/</span><span class="n">JuliaPro_v1</span><span class="mf">.4.2</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">registries</span><span class="o">/</span><span class="n">JuliaPro</span><span class="err">`</span>
+<span class="err"></span><span class="p">[</span><span class="mi">32</span><span class="n">m</span><span class="err"></span><span class="p">[</span><span class="mi">1</span><span class="n">m</span>  <span class="n">Resolving</span><span class="err"></span><span class="p">[</span><span class="mi">22</span><span class="n">m</span><span class="err"></span><span class="p">[</span><span class="mi">39</span><span class="n">m</span> <span class="n">package</span> <span class="n">versions</span><span class="p">...</span>
+<span class="err"></span><span class="p">[</span><span class="mi">32</span><span class="n">m</span><span class="err"></span><span class="p">[</span><span class="mi">1</span><span class="n">m</span>   <span class="n">Updating</span><span class="err"></span><span class="p">[</span><span class="mi">22</span><span class="n">m</span><span class="err"></span><span class="p">[</span><span class="mi">39</span><span class="n">m</span> <span class="err">`</span><span class="o">~/</span><span class="p">.</span><span class="n">juliapro</span><span class="o">/</span><span class="n">JuliaPro_v1</span><span class="mf">.4.2</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">environments</span><span class="o">/</span><span class="n">v1</span><span class="mf">.4</span><span class="o">/</span><span class="n">Project</span><span class="p">.</span><span class="n">toml</span><span class="err">`</span>
+<span class="err"></span><span class="p">[</span><span class="mi">90</span><span class="n">m</span> <span class="p">[</span><span class="n">no</span> <span class="n">changes</span><span class="p">]</span><span class="err"></span><span class="p">[</span><span class="mi">39</span><span class="n">m</span>
+<span class="err"></span><span class="p">[</span><span class="mi">32</span><span class="n">m</span><span class="err"></span><span class="p">[</span><span class="mi">1</span><span class="n">m</span>   <span class="n">Updating</span><span class="err"></span><span class="p">[</span><span class="mi">22</span><span class="n">m</span><span class="err"></span><span class="p">[</span><span class="mi">39</span><span class="n">m</span> <span class="err">`</span><span class="o">~/</span><span class="p">.</span><span class="n">juliapro</span><span class="o">/</span><span class="n">JuliaPro_v1</span><span class="mf">.4.2</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">environments</span><span class="o">/</span><span class="n">v1</span><span class="mf">.4</span><span class="o">/</span><span class="n">Manifest</span><span class="p">.</span><span class="n">toml</span><span class="err">`</span>
+<span class="err"></span><span class="p">[</span><span class="mi">90</span><span class="n">m</span> <span class="p">[</span><span class="n">no</span> <span class="n">changes</span><span class="p">]</span><span class="err"></span><span class="p">[</span><span class="mi">39</span><span class="n">m</span>
+<span class="err">┌</span> <span class="nl">Info</span><span class="p">:</span> <span class="n">Precompiling</span> <span class="n">CSV</span> <span class="p">[</span><span class="mi">336</span><span class="n">ed68f</span><span class="o">-</span><span class="mi">0</span><span class="n">bac</span><span class="o">-</span><span class="mi">5</span><span class="n">ca0</span><span class="o">-</span><span class="mi">87</span><span class="n">d4</span><span class="o">-</span><span class="mi">7</span><span class="n">b16caf5d00b</span><span class="p">]</span>
+<span class="err">└</span> <span class="p">@</span> <span class="n">Base</span> <span class="n">loading</span><span class="p">.</span><span class="nl">jl</span><span class="p">:</span><span class="mi">1260</span>
+<span class="err"></span><span class="p">[</span><span class="mi">32</span><span class="n">m</span><span class="err"></span><span class="p">[</span><span class="mi">1</span><span class="n">m</span>  <span class="n">Resolving</span><span class="err"></span><span class="p">[</span><span class="mi">22</span><span class="n">m</span><span class="err"></span><span class="p">[</span><span class="mi">39</span><span class="n">m</span> <span class="n">package</span> <span class="n">versions</span><span class="p">...</span>
+<span class="err"></span><span class="p">[</span><span class="mi">32</span><span class="n">m</span><span class="err"></span><span class="p">[</span><span class="mi">1</span><span class="n">m</span>   <span class="n">Updating</span><span class="err"></span><span class="p">[</span><span class="mi">22</span><span class="n">m</span><span class="err"></span><span class="p">[</span><span class="mi">39</span><span class="n">m</span> <span class="err">`</span><span class="o">~/</span><span class="p">.</span><span class="n">juliapro</span><span class="o">/</span><span class="n">JuliaPro_v1</span><span class="mf">.4.2</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">environments</span><span class="o">/</span><span class="n">v1</span><span class="mf">.4</span><span class="o">/</span><span class="n">Project</span><span class="p">.</span><span class="n">toml</span><span class="err">`</span>
+<span class="err"></span><span class="p">[</span><span class="mi">90</span><span class="n">m</span> <span class="p">[</span><span class="n">no</span> <span class="n">changes</span><span class="p">]</span><span class="err"></span><span class="p">[</span><span class="mi">39</span><span class="n">m</span>
+<span class="err"></span><span class="p">[</span><span class="mi">32</span><span class="n">m</span><span class="err"></span><span class="p">[</span><span class="mi">1</span><span class="n">m</span>   <span class="n">Updating</span><span class="err"></span><span class="p">[</span><span class="mi">22</span><span class="n">m</span><span class="err"></span><span class="p">[</span><span class="mi">39</span><span class="n">m</span> <span class="err">`</span><span class="o">~/</span><span class="p">.</span><span class="n">juliapro</span><span class="o">/</span><span class="n">JuliaPro_v1</span><span class="mf">.4.2</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">environments</span><span class="o">/</span><span class="n">v1</span><span class="mf">.4</span><span class="o">/</span><span class="n">Manifest</span><span class="p">.</span><span class="n">toml</span><span class="err">`</span>
+<span class="err"></span><span class="p">[</span><span class="mi">90</span><span class="n">m</span> <span class="p">[</span><span class="n">no</span> <span class="n">changes</span><span class="p">]</span><span class="err"></span><span class="p">[</span><span class="mi">39</span><span class="n">m</span>
+<span class="err"></span><span class="p">[</span><span class="mi">32</span><span class="n">m</span><span class="err"></span><span class="p">[</span><span class="mi">1</span><span class="n">m</span>  <span class="n">Resolving</span><span class="err"></span><span class="p">[</span><span class="mi">22</span><span class="n">m</span><span class="err"></span><span class="p">[</span><span class="mi">39</span><span class="n">m</span> <span class="n">package</span> <span class="n">versions</span><span class="p">...</span>
+<span class="err"></span><span class="p">[</span><span class="mi">32</span><span class="n">m</span><span class="err"></span><span class="p">[</span><span class="mi">1</span><span class="n">m</span>   <span class="n">Updating</span><span class="err"></span><span class="p">[</span><span class="mi">22</span><span class="n">m</span><span class="err"></span><span class="p">[</span><span class="mi">39</span><span class="n">m</span> <span class="err">`</span><span class="o">~/</span><span class="p">.</span><span class="n">juliapro</span><span class="o">/</span><span class="n">JuliaPro_v1</span><span class="mf">.4.2</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">environments</span><span class="o">/</span><span class="n">v1</span><span class="mf">.4</span><span class="o">/</span><span class="n">Project</span><span class="p">.</span><span class="n">toml</span><span class="err">`</span>
+<span class="err"></span><span class="p">[</span><span class="mi">90</span><span class="n">m</span> <span class="p">[</span><span class="n">no</span> <span class="n">changes</span><span class="p">]</span><span class="err"></span><span class="p">[</span><span class="mi">39</span><span class="n">m</span>
+<span class="err"></span><span class="p">[</span><span class="mi">32</span><span class="n">m</span><span class="err"></span><span class="p">[</span><span class="mi">1</span><span class="n">m</span>   <span class="n">Updating</span><span class="err"></span><span class="p">[</span><span class="mi">22</span><span class="n">m</span><span class="err"></span><span class="p">[</span><span class="mi">39</span><span class="n">m</span> <span class="err">`</span><span class="o">~/</span><span class="p">.</span><span class="n">juliapro</span><span class="o">/</span><span class="n">JuliaPro_v1</span><span class="mf">.4.2</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">environments</span><span class="o">/</span><span class="n">v1</span><span class="mf">.4</span><span class="o">/</span><span class="n">Manifest</span><span class="p">.</span><span class="n">toml</span><span class="err">`</span>
+<span class="err"></span><span class="p">[</span><span class="mi">90</span><span class="n">m</span> <span class="p">[</span><span class="n">no</span> <span class="n">changes</span><span class="p">]</span><span class="err"></span><span class="p">[</span><span class="mi">39</span><span class="n">m</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">test</span> <span class="o">=</span> <span class="n">CSV</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&quot;test.csv&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">true</span><span class="p">,</span> <span class="n">missingstring</span> <span class="o">=</span> <span class="s">&quot;0&quot;</span><span class="p">)</span>
+<span class="n">clean_test</span> <span class="o">=</span> <span class="n">dropmissing</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="err">64-element Array{String,1}:</span>
+<span class="err"> &quot;22&quot;</span>
+<span class="err"> &quot;26&quot;</span>
+<span class="err"> &quot;48&quot;</span>
+<span class="err"> &quot;33&quot;</span>
+<span class="err"> &quot;&quot;</span>
+<span class="err"> &quot;20&quot;</span>
+<span class="err"> &quot;28&quot;</span>
+<span class="err"> &quot;10&quot;</span>
+<span class="err"> &quot;13&quot;</span>
+<span class="err"> &quot;60&quot;</span>
+<span class="err"> &quot;6&quot;</span>
+<span class="err"> &quot;2&quot;</span>
+<span class="err"> &quot;27&quot;</span>
+<span class="err"> ⋮</span>
+<span class="err"> &quot;14.5&quot;</span>
+<span class="err"> &quot;24&quot;</span>
+<span class="err"> &quot;&quot;</span>
+<span class="err"> &quot;54&quot;</span>
+<span class="err"> &quot;5&quot;</span>
+<span class="err"> &quot;24&quot;</span>
+<span class="err"> &quot;6&quot;</span>
+<span class="err"> &quot;29&quot;</span>
+<span class="err"> &quot;48&quot;</span>
+<span class="err"> &quot;50&quot;</span>
+<span class="err"> &quot;3&quot;</span>
+<span class="err"> &quot;&quot;</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">male</span> <span class="o">=</span> <span class="n">clean_test</span><span class="p">[(</span><span class="n">clean_test</span><span class="p">[</span><span class="o">:</span><span class="n">Sex</span><span class="p">]</span><span class="o">.==</span> <span class="s">&quot;male&quot;</span><span class="p">),</span> <span class="o">:</span><span class="p">]</span>
+<span class="n">male_age</span> <span class="o">=</span> <span class="p">[</span><span class="n">parse</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="kp">in</span> <span class="n">male</span><span class="p">[</span><span class="o">:</span><span class="n">Age</span><span class="p">]</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span> <span class="p">]</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;Average age for male passengers: &quot;</span><span class="p">,</span> <span class="n">mean</span><span class="p">(</span><span class="n">male_age</span><span class="p">))</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="err">┌</span> <span class="n">Warning</span><span class="p">:</span> <span class="o">`</span><span class="n">getindex</span><span class="p">(</span><span class="n">df</span><span class="p">::</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">col_ind</span><span class="p">::</span><span class="n">ColumnIndex</span><span class="p">)</span><span class="o">`</span> <span class="k">is</span> <span class="n">deprecated</span><span class="p">,</span> <span class="n">use</span> <span class="o">`</span><span class="n">df</span><span class="p">[</span><span class="o">!</span><span class="p">,</span> <span class="n">col_ind</span><span class="p">]</span><span class="o">`</span> <span class="k">instead</span><span class="p">.</span>
+<span class="err">│</span>   <span class="n">caller</span> <span class="o">=</span> <span class="n">top</span><span class="o">-</span><span class="k">level</span> <span class="k">scope</span> <span class="k">at</span> <span class="k">In</span><span class="p">[</span><span class="mi">106</span><span class="p">]:</span><span class="mi">1</span>
+<span class="err">└</span> <span class="o">@</span> <span class="n">Core</span> <span class="k">In</span><span class="p">[</span><span class="mi">106</span><span class="p">]:</span><span class="mi">1</span>
+<span class="err">┌</span> <span class="n">Warning</span><span class="p">:</span> <span class="o">`</span><span class="n">getindex</span><span class="p">(</span><span class="n">df</span><span class="p">::</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">col_ind</span><span class="p">::</span><span class="n">ColumnIndex</span><span class="p">)</span><span class="o">`</span> <span class="k">is</span> <span class="n">deprecated</span><span class="p">,</span> <span class="n">use</span> <span class="o">`</span><span class="n">df</span><span class="p">[</span><span class="o">!</span><span class="p">,</span> <span class="n">col_ind</span><span class="p">]</span><span class="o">`</span> <span class="k">instead</span><span class="p">.</span>
+<span class="err">│</span>   <span class="n">caller</span> <span class="o">=</span> <span class="n">top</span><span class="o">-</span><span class="k">level</span> <span class="k">scope</span> <span class="k">at</span> <span class="k">In</span><span class="p">[</span><span class="mi">106</span><span class="p">]:</span><span class="mi">2</span>
+<span class="err">└</span> <span class="o">@</span> <span class="n">Core</span> <span class="k">In</span><span class="p">[</span><span class="mi">106</span><span class="p">]:</span><span class="mi">2</span>
+
+
+<span class="n">Average</span> <span class="n">age</span> <span class="k">for</span> <span class="n">male</span> <span class="n">passengers</span><span class="p">:</span> <span class="mi">27</span><span class="p">.</span><span class="mi">805555555555557</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">female</span> <span class="o">=</span> <span class="n">clean_test</span><span class="p">[(</span><span class="n">clean_test</span><span class="p">[</span><span class="o">:</span><span class="n">Sex</span><span class="p">]</span><span class="o">.==</span> <span class="s">&quot;female&quot;</span><span class="p">),</span> <span class="o">:</span><span class="p">]</span>
+<span class="n">female_age</span> <span class="o">=</span> <span class="p">[</span><span class="n">parse</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="kp">in</span> <span class="n">female</span><span class="p">[</span><span class="o">:</span><span class="n">Age</span><span class="p">]</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span> <span class="p">]</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;Average age for female passengers: &quot;</span><span class="p">,</span> <span class="n">mean</span><span class="p">(</span><span class="n">female_age</span><span class="p">))</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">Average</span> <span class="n">age</span> <span class="k">for</span> <span class="n">female</span> <span class="n">passengers</span><span class="p">:</span> <span class="mi">23</span><span class="p">.</span><span class="mi">136333333333333</span>
+
+
+<span class="err">┌</span> <span class="n">Warning</span><span class="p">:</span> <span class="o">`</span><span class="n">getindex</span><span class="p">(</span><span class="n">df</span><span class="p">::</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">col_ind</span><span class="p">::</span><span class="n">ColumnIndex</span><span class="p">)</span><span class="o">`</span> <span class="k">is</span> <span class="n">deprecated</span><span class="p">,</span> <span class="n">use</span> <span class="o">`</span><span class="n">df</span><span class="p">[</span><span class="o">!</span><span class="p">,</span> <span class="n">col_ind</span><span class="p">]</span><span class="o">`</span> <span class="k">instead</span><span class="p">.</span>
+<span class="err">│</span>   <span class="n">caller</span> <span class="o">=</span> <span class="n">top</span><span class="o">-</span><span class="k">level</span> <span class="k">scope</span> <span class="k">at</span> <span class="k">In</span><span class="p">[</span><span class="mi">108</span><span class="p">]:</span><span class="mi">1</span>
+<span class="err">└</span> <span class="o">@</span> <span class="n">Core</span> <span class="k">In</span><span class="p">[</span><span class="mi">108</span><span class="p">]:</span><span class="mi">1</span>
+<span class="err">┌</span> <span class="n">Warning</span><span class="p">:</span> <span class="o">`</span><span class="n">getindex</span><span class="p">(</span><span class="n">df</span><span class="p">::</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">col_ind</span><span class="p">::</span><span class="n">ColumnIndex</span><span class="p">)</span><span class="o">`</span> <span class="k">is</span> <span class="n">deprecated</span><span class="p">,</span> <span class="n">use</span> <span class="o">`</span><span class="n">df</span><span class="p">[</span><span class="o">!</span><span class="p">,</span> <span class="n">col_ind</span><span class="p">]</span><span class="o">`</span> <span class="k">instead</span><span class="p">.</span>
+<span class="err">│</span>   <span class="n">caller</span> <span class="o">=</span> <span class="n">top</span><span class="o">-</span><span class="k">level</span> <span class="k">scope</span> <span class="k">at</span> <span class="k">In</span><span class="p">[</span><span class="mi">108</span><span class="p">]:</span><span class="mi">2</span>
+<span class="err">└</span> <span class="o">@</span> <span class="n">Core</span> <span class="k">In</span><span class="p">[</span><span class="mi">108</span><span class="p">]:</span><span class="mi">2</span>
+</pre></div>
+
+
+<h2>Question 4</h2>
+<p>Download the file RestaurantData.zip file containing the data for this project assignment from the Moodle. Unzip the file in a directory that will serve as your working directory. When you start up Julia, make sure to change your working directory to the directory where you unzipped the data. </p>
+<p>The data for this project came from Kaggle where somebody had used the Zomato API to scrape the data. Zomato API Analysis is useful for foodies who want to taste the best cuisines of every part of the world which lies in their budget. </p>
+<p>For more information on Zomato API and Zomato API key you could visit https://developers.zomato.com/api#headline1 and https://developers.zomato.com/documentation
+Data Fetching: Data had been originally collected from the Zomato API in the form of .json files (raw data). The collected data has been stored in the Comma Separated Value file zomato.csv. </p>
+<p>Each restaurant in the dataset is uniquely identified by its Restaurant Id. Every Restaurant contains the following variables: <br>
+•   Restaurant Id: Unique id of every restaurant across various cities of the world <br>
+•   Restaurant Name: Name of the restaurant <br>
+•   Country Code: Country in which restaurant is located <br> 
+•   City: City in which restaurant is located <br>
+•   Address: Address of the restaurant <br>
+•   Locality: Location in the city <br>
+•   Locality Verbose: Detailed description of the locality <br>
+•   Longitude: Longitude coordinate of the restaurant's location <br>
+•   Latitude: Latitude coordinate of the restaurant's location <br>
+•   Cuisines: Cuisines offered by the restaurant <br>
+•   Average Cost for two: Cost for two people in different currencies 👫 <br>
+•   Currency: Currency of the country <br>
+•   Has Table booking: yes/no <br>
+•   Has Online delivery: yes/ no <br>
+•   Is delivering: yes/ no <br>
+•   Switch to order menu: yes/no <br>
+•   Price range: range of price of food <br>
+•   Aggregate Rating: Average rating out of 5 <br>
+•   Rating color: depending upon the average rating color <br>
+•   Rating text: text on the basis of rating of rating <br>
+•   Votes: Number of ratings casted by people</p>
+<h3>4.1 Plot the user rankings for the restaurants</h3>
+<p>Read the zomato data into Julia via the <code>CSV.read</code> function and look at the first few rows.
+There are many columns in this dataset. You can see how many by typing <code>ncol(zomato)</code> (you can see the number of rows with the <code>nrow</code> function). In addition, you can see the names of each column by typing <code>names(zomato)</code> (the names are also listed on the previous page.) 
+Make a simple histogram of the ratings (column 18 in the zomato dataset).</p>
+<div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">Plots</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="err">┌ Info: Precompiling Plots [91a5bcdd-55d7-5caf-9e0b-520d859cae80]</span>
+<span class="err">└ @ Base loading.jl:1260</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">zomato</span> <span class="o">=</span> <span class="n">CSV</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&quot;zomato.csv&quot;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="kc">true</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">minimum</span><span class="p">(</span><span class="n">zomato</span><span class="o">.</span><span class="s">&quot;Aggregate rating&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="err">0.0</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">names</span><span class="p">(</span><span class="n">zomato</span><span class="p">)</span>
+<span class="n">histogram</span><span class="p">(</span><span class="n">zomato</span><span class="o">.</span><span class="s">&quot;Aggregate rating&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<p><img alt="svg" src="images/Austin_Ma_Final_exam_summer_2020_31_0.svg"></p>
+<h3>4.2 Finding the 3 best restaurants in a country by price range</h3>
+<p>Write a function called best that takes two arguments: a 3-character country code of a country and a price range (numbers 1,2,3,4). The function should read the zomato.csv file and return a data frame with the names of the restaurant and the city that have the 3 best (i.e. highest) ranking for a price range in that country. There are 4 price range levels. Countries that do not have data on a particular price range should be excluded from the set of restaurants when deciding the rankings. 
+Handling ties. If there is a tie for the best restaurant for a given price range, then the restaurant names should be sorted in alphabetical order.
+The function should use the following template. </p>
+<div class="highlight"><pre><span></span><span class="kt">Function</span> <span class="n">best</span><span class="p">(</span><span class="n">country</span><span class="p">,</span> <span class="n">pricerange</span><span class="p">)</span>
+        <span class="c">## Read zomato data</span>
+        <span class="c">## Check that country and price range are valid</span>
+        <span class="c">## Return restaurant name in that state with highest ranking</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>The function should check the validity of its arguments. If an invalid country value is passed to best, the function should throw an error via the stop function with the exact message “invalid country”. If an invalid price range value is passed to best, the function should throw an error via the stop function with the exact message “invalid price range”. 
+Here is some sample output from the function (WARNING: we will run different tests and the results shown here might not actually be correct)</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">best</span><span class="p">(</span><span class="s">&quot;USA&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="mi">3</span> <span class="n">rows</span> <span class="n">×</span> <span class="mi">2</span> <span class="n">columns</span>
+
+  <span class="n">Restaurant</span> <span class="n">Name</span>       <span class="n">City</span>                  
+  <span class="n">String</span>                  <span class="n">String</span>                 
+<span class="mi">1</span> <span class="n">Oakwood</span> <span class="n">Cafe</span>            <span class="n">Dalton</span>                
+<span class="mi">2</span> <span class="n">Rae</span><span class="o">&#39;</span><span class="n">s</span> <span class="n">Coastal</span> <span class="n">Cafe</span>      <span class="n">Augusta</span>               
+<span class="mi">3</span> <span class="n">Shorts</span> <span class="n">Burger</span> <span class="n">and</span> <span class="n">Shine</span> <span class="n">Cedar</span> <span class="n">Rapids</span><span class="o">/</span><span class="n">Iowa</span> <span class="n">City</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">best</span><span class="p">(</span><span class="s">&quot;IND&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="mi">3</span> <span class="n">rows</span> <span class="n">×</span> <span class="mi">2</span> <span class="n">columns</span>
+  <span class="n">Restaurant</span> <span class="n">Name</span>         <span class="n">City</span>   
+  <span class="n">String</span>                  <span class="n">String</span>                 
+<span class="mi">1</span> <span class="n">AB</span><span class="o">&#39;</span><span class="n">s</span> <span class="o">-</span> <span class="n">Absolute</span> <span class="n">Barbecues</span> <span class="n">Chennai</span>
+<span class="mi">2</span> <span class="n">Sagar</span> <span class="n">Gaire</span> <span class="n">Fast</span> <span class="n">Food</span>     <span class="n">Bhopal</span> 
+<span class="mi">3</span> <span class="n">Sheroes</span> <span class="n">Hangout</span>           <span class="n">Agra</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">best</span><span class="p">(</span><span class="s">&quot;TGH&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">Error</span> <span class="kp">in</span> <span class="n">best</span><span class="p">(</span><span class="s">&quot;TGH&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">:</span> <span class="n">invalid</span> <span class="n">country</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">best</span><span class="p">(</span><span class="s">&quot;BRA&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">Error</span> <span class="kp">in</span> <span class="n">best</span><span class="p">(</span><span class="s">&quot;BRA&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">:</span> <span class="n">invalid</span> <span class="n">price</span> <span class="n">range</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">country_code</span> <span class="o">=</span> <span class="n">CSV</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&quot;Country-Code.csv&quot;</span><span class="p">)</span>
+<span class="n">names</span><span class="p">(</span><span class="n">country_code</span><span class="p">)</span>
+<span class="n">country_read</span> <span class="o">=</span> <span class="n">country_code</span><span class="p">[</span><span class="n">country_code</span><span class="o">.</span><span class="s">&quot;3lettercode&quot;</span> <span class="o">.==</span> <span class="s">&quot;USA&quot;</span><span class="p">,</span> <span class="o">:</span><span class="p">]</span>
+</pre></div>
+
+
+<table class="data-frame"><thead><tr><th></th><th>Country Code</th><th>Country</th><th>3lettercode</th></tr><tr><th></th><th>Int64</th><th>String</th><th>String</th></tr></thead><tbody><p>1 rows × 3 columns</p><tr><th>1</th><td>216</td><td>United States</td><td>USA</td></tr></tbody></table>
+
+<div class="highlight"><pre><span></span><span class="n">zomato</span> <span class="o">=</span> <span class="n">CSV</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&quot;zomato.csv&quot;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="kc">true</span><span class="p">)</span>
+<span class="n">names</span><span class="p">(</span><span class="n">zomato</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="err">21-element Array{String,1}:</span>
+<span class="err"> &quot;Restaurant ID&quot;</span>
+<span class="err"> &quot;Restaurant Name&quot;</span>
+<span class="err"> &quot;Country Code&quot;</span>
+<span class="err"> &quot;City&quot;</span>
+<span class="err"> &quot;Address&quot;</span>
+<span class="err"> &quot;Locality&quot;</span>
+<span class="err"> &quot;Locality Verbose&quot;</span>
+<span class="err"> &quot;Longitude&quot;</span>
+<span class="err"> &quot;Latitude&quot;</span>
+<span class="err"> &quot;Cuisines&quot;</span>
+<span class="err"> &quot;Average Cost for two&quot;</span>
+<span class="err"> &quot;Currency&quot;</span>
+<span class="err"> &quot;Has Table booking&quot;</span>
+<span class="err"> &quot;Has Online delivery&quot;</span>
+<span class="err"> &quot;Is delivering now&quot;</span>
+<span class="err"> &quot;Switch to order menu&quot;</span>
+<span class="err"> &quot;Price range&quot;</span>
+<span class="err"> &quot;Aggregate rating&quot;</span>
+<span class="err"> &quot;Rating color&quot;</span>
+<span class="err"> &quot;Rating text&quot;</span>
+<span class="err"> &quot;Votes&quot;</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">best</span><span class="p">(</span><span class="n">country</span><span class="p">,</span> <span class="n">pricerange</span><span class="p">)</span>
+
+    <span class="c"># Check that country and price range are valid</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">pricerange</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">pricerange</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">println</span><span class="p">(</span><span class="n">throw</span><span class="p">(</span><span class="kt">DomainError</span><span class="p">(</span><span class="n">pricerange</span><span class="p">,</span> <span class="s">&quot;invalid price range&quot;</span><span class="p">)))</span>
+    <span class="k">end</span>
+
+    <span class="c"># load in the country and if the result is empty then throw error</span>
+    <span class="n">country_read</span> <span class="o">=</span> <span class="n">country_code</span><span class="p">[</span><span class="n">country_code</span><span class="o">.</span><span class="s">&quot;3lettercode&quot;</span> <span class="o">.==</span> <span class="n">country</span><span class="p">,</span> <span class="o">:</span><span class="p">]</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">isempty</span><span class="p">(</span><span class="n">country_read</span><span class="p">))</span>
+        <span class="n">println</span><span class="p">(</span><span class="n">throw</span><span class="p">(</span><span class="kt">DomainError</span><span class="p">(</span><span class="n">country</span><span class="p">,</span> <span class="s">&quot;invalid country&quot;</span><span class="p">)))</span>
+    <span class="k">end</span>
+
+    <span class="c"># Read zomato data</span>
+    <span class="n">zomato</span> <span class="o">=</span> <span class="n">CSV</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&quot;zomato.csv&quot;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="kc">true</span><span class="p">)</span>
+
+    <span class="c"># filter out restaurant name in that country with that specified price range</span>
+    <span class="n">filter1</span> <span class="o">=</span> <span class="n">zomato</span><span class="p">[</span><span class="n">zomato</span><span class="o">.</span><span class="s">&quot;Country Code&quot;</span> <span class="o">.==</span> <span class="n">country_read</span><span class="o">.</span><span class="s">&quot;Country Code&quot;</span><span class="p">,</span> <span class="o">:</span><span class="p">]</span>
+    <span class="n">filter2</span> <span class="o">=</span> <span class="n">filter1</span><span class="p">[</span><span class="n">filter1</span><span class="o">.</span><span class="s">&quot;Price range&quot;</span> <span class="o">.==</span> <span class="n">pricerange</span><span class="p">,</span> <span class="o">:</span><span class="p">]</span>
+
+    <span class="c"># sort it based on highest rating and alphatically</span>
+    <span class="n">sorted_zomato</span> <span class="o">=</span> <span class="n">sort</span><span class="p">(</span><span class="n">filter2</span><span class="p">,</span> <span class="p">[</span><span class="o">:</span><span class="s">&quot;Aggregate rating&quot;</span><span class="p">,</span> <span class="o">:</span><span class="s">&quot;Restaurant Name&quot;</span><span class="p">],</span> <span class="n">rev</span> <span class="o">=</span> <span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="kc">false</span><span class="p">))</span>
+
+    <span class="c"># outputing the subdataframe</span>
+    <span class="n">select</span><span class="p">(</span><span class="n">first</span><span class="p">(</span><span class="n">sorted_zomato</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">[</span><span class="o">:</span><span class="s">&quot;Restaurant Name&quot;</span><span class="p">,</span> <span class="s">&quot;City&quot;</span><span class="p">])</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="err">best (generic function with 1 method)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">best</span><span class="p">(</span><span class="s">&quot;USA&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+
+<table class="data-frame"><thead><tr><th></th><th>Restaurant Name</th><th>City</th></tr><tr><th></th><th>String</th><th>String</th></tr></thead><tbody><p>3 rows × 2 columns</p><tr><th>1</th><td>Ingleside Village Pizza</td><td>Macon</td></tr><tr><th>2</th><td>Marukame Udon</td><td>Rest of Hawaii</td></tr><tr><th>3</th><td>Mazzaro's Italian Market</td><td>Tampa Bay</td></tr></tbody></table>
+
+<div class="highlight"><pre><span></span>
+</pre></div>                </article>
+            </aside><!-- /#featured -->
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
